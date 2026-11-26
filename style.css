@@ -70,6 +70,11 @@ h1 {
   height: 14em;
   border: 0;
   border-radius: 3.4em;
+  color: #fff;
+  font-weight: 700;
+  font-size: max(2em, 13px);
+  line-height: 1.15;
+  padding: 0 1em;
   transition: transform .22s ease, box-shadow .22s ease;
 }
 .card-black { background: #000; }
@@ -91,7 +96,7 @@ h1 {
 .hint {
   text-align: center;
   margin: 4em 0 0;
-  font-size: max(1.7em, 14px);
+  font-size: max(1.7em, 14px); 
   color: #666;
 }
 
