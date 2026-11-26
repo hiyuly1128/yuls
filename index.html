@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yul Kim | Personal Library</title>
+  <meta name="description" content="Yul Kim's portfolio, set up as a personal library. Step inside and pick a book.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='18' y='14' width='20' height='72' fill='%234a43ff'/%3E%3Crect x='42' y='8' width='16' height='78' fill='%23ff7f0a'/%3E%3Crect x='62' y='8' width='20' height='78' fill='%23e5a95c'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=VT323&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-view="welcome" data-season="fall">
+
+  <!-- ============ WELCOME ============ -->
+  <main id="welcome" class="view stage">
+    <h1>Welcome!</h1>
+
+    <div class="card-stack" aria-label="Library cards">
+      <button class="card card-black" type="button" aria-label="Enter the library"></button>
+      <button class="card card-blue" type="button" aria-label="Enter the library"></button>
+      <button class="card card-red" type="button" aria-label="Enter the library"></button>
+    </div>
+
+    <div class="card-row">
+      <button class="card card-black" type="button" aria-label="Enter the library"></button>
+      <button class="card card-blue" type="button" aria-label="Enter the library"></button>
+      <button class="card card-red" type="button" aria-label="Enter the library"></button>
+    </div>
+
+    <p class="hint">Pick a card to check in</p>
+  </main>
+
+  <!-- ============ LIBRARY ============ -->
+  <div id="library" class="view stage" hidden>
+    <header class="lib-bar">
+      <button id="backToWelcome" class="link-btn" type="button">&larr; Library cards</button>
+      <span class="lib-title">Yul's Library</span>
+    </header>
+
+    <section class="shelves" aria-label="Bookshelves">
+      <!-- Shelf 1 -->
+      <div class="shelf">
+        <div class="shelf-items">
+          <button class="book book-about" type="button" data-book="about"><span class="spine"></span></button>
+          <button class="book book-experience" type="button" data-book="experience"><span class="spine"></span></button>
+          <button class="book book-projects" type="button" data-book="projects"><span class="spine"></span></button>
+          <button class="book book-writing" type="button" data-book="writing"><span class="spine"></span></button>
+
+          <div class="clock" role="timer" aria-label="Current time and date">
+            <div class="clock-time" id="clockTime">00:00</div>
+            <div class="clock-date" id="clockDate">Month, Day, Year</div>
+          </div>
+        </div>
+        <div class="board"></div>
+      </div>
+
+      <!-- Shelf 2 -->
+      <div class="shelf shelf-2">
+        <div class="shelf-items">
+          <a class="stickies" href="#notes" id="stickies" aria-label="Leave a note">
+            <span class="sticky s-back"></span>
+            <span class="sticky s-front"><em>Leave a note</em></span>
+            <span class="sticky s-strip"></span>
+            <span class="sticky s-pink"></span>
+          </a>
+
+          <button class="vase" id="vase" type="button" aria-label="Season flower. Tap to preview other seasons">
+            <span class="vase-body"><span class="season-label" id="seasonLabel">Fall</span></span>
+            <span class="vase-foot"></span>
+            <svg class="flower" viewBox="0 0 100 130" aria-hidden="true">
+              <rect class="stem" x="46" y="50" width="8" height="80" rx="1"/>
+              <path class="leaf" d="M54 102 C70 100 80 90 84 76 C68 78 56 88 54 102Z"/>
+              <polygon class="petals" id="petals" points=""/>
+              <circle class="core" cx="50" cy="34" r="10"/>
+            </svg>
+          </button>
+
+          <button class="book book-skills" type="button" data-book="skills"><span class="spine"></span></button>
+          <button class="book book-contact" type="button" data-book="contact"><span class="spine"></span></button>
+        </div>
+        <div class="board"></div>
+      </div>
+    </section>
+
+    <!-- Open book = visitor notes -->
+    <section class="open-book" id="notes" aria-labelledby="notesTitle">
+      <div class="page page-left">
+        <h2 id="notesTitle">Notes from visitors</h2>
+        <div id="notesList" class="notes-list"></div>
+      </div>
+      <div class="page page-right">
+        <h2>Leave a note</h2>
+        <p class="page-sub">Feedback, ideas, a hello. I read every one and publish a selection here.</p>
+        <form id="noteForm" novalidate>
+          <label for="noteName">Your name <span>(optional)</span></label>
+          <input id="noteName" name="name" type="text" maxlength="60" autocomplete="name">
+          <label for="noteText">Your note</label>
+          <textarea id="noteText" name="text" rows="5" maxlength="600" required></textarea>
+          <button type="submit" class="send">Send to Yul</button>
+          <p id="noteStatus" class="status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="foot">&copy; <span id="year"></span> Yul Kim</footer>
+  </div>
+
+  <!-- ============ BOOK (full screen) ============ -->
+  <div id="bookView" class="book-view" hidden role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="book-head" id="bookHead">
+      <button id="bookClose" class="close-btn" type="button">&times; Close book</button>
+      <h2 id="bookTitle"></h2>
+      <p id="bookSub"></p>
+    </div>
+    <div class="book-body" id="bookBody"></div>
+    <nav class="book-nav" id="bookNav" aria-label="Other books"></nav>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
