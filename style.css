@@ -70,12 +70,6 @@ h1 {
   height: 14em;
   border: 0;
   border-radius: 3.4em;
-  color: #fff;
-  font-weight: 700;
-  font-size: max(2em, 13px);
-  line-height: 1.15;
-  padding: 0 1em;
-  transition: transform .22s ease, box-shadow .22s ease;
 }
 .card-black { background: #000; }
 .card-blue  { background: var(--blue); }
